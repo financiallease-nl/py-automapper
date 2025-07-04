@@ -1,7 +1,8 @@
 from typing import Iterable, Type
 
-from automapper import Mapper
 from pydantic import BaseModel
+
+from automapper import Mapper
 
 
 def spec_function(target_cls: Type[BaseModel]) -> Iterable[str]:

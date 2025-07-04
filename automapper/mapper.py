@@ -34,8 +34,8 @@ FieldsMap = Optional[Dict[str, Union[Callable[[S], Any], Any]]]
 def _try_get_field_value(
     field_name: str, original_obj: Any, custom_mapping: FieldsMap
 ) -> Tuple[bool, Any]:
-    if field_name in (custom_mapping or {}): # type: ignore [index]
-        if callable(custom_mapping[field_name]): # type: ignore [index]
+    if field_name in (custom_mapping or {}):  # type: ignore [index]
+        if callable(custom_mapping[field_name]):  # type: ignore [index]
             return True, custom_mapping[field_name](original_obj)  # type: ignore [index]
         return True, custom_mapping[field_name]  # type: ignore [index]
     if hasattr(original_obj, field_name):
@@ -216,7 +216,9 @@ class Mapper:
             raise MappingError(f"Missing mapping type for input type {obj_type}")
         obj_type_prefix = f"{obj_type.__name__}."
 
-        target_cls, target_cls_field_mappings, target_cls_model_factory= self._mappings[obj_type]
+        target_cls, target_cls_field_mappings, target_cls_model_factory = (
+            self._mappings[obj_type]
+        )
 
         common_fields_mapping = fields_mapping
         if target_cls_field_mappings:
@@ -235,8 +237,6 @@ class Mapper:
                     **common_fields_mapping,
                     **fields_mapping,
                 }  # merge two dict into one, fields_mapping has priority
-
-
 
         return self._map_common(
             obj,
@@ -359,7 +359,6 @@ class Mapper:
         _visited_stack.add(obj_id)
 
         target_cls_fields = self._get_fields(target_cls)
-
 
         mapped_values: Dict[str, Any] = {}
         for field_name in target_cls_fields:

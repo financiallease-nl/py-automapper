@@ -28,12 +28,12 @@ def test_map__without_deepcopy_mapped_objects_should_be_the_same():
 
     # default deepcopy behavior
     public_info = mapper.to(PublicPersonInfo).map(info)
-    assert (
-        public_info.address is not address
-    ), "Address mapped object is same as origin."
+    assert public_info.address is not address, (
+        "Address mapped object is same as origin."
+    )
 
     # disable deepcopy
     public_info = mapper.to(PublicPersonInfo).map(info, use_deepcopy=False)
-    assert (
-        public_info.address is info.address
-    ), "Address mapped object is not same as origin."
+    assert public_info.address is info.address, (
+        "Address mapped object is not same as origin."
+    )
